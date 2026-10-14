@@ -88,7 +88,7 @@ class CloudStorageFile(File):
 
 	def validate(self) -> None:
 		"""
-		HASH: ca4a6912ebf7a8dafa9e56822bd304fa38c4da09
+		HASH: e06abda6b3dfea5027ad6b268a6628cd7e9ba408
 		REPO: https://github.com/frappe/frappe
 		PATH: frappe/core/doctype/file/file.py
 		METHOD: validate
@@ -97,6 +97,8 @@ class CloudStorageFile(File):
 			if self.file_url:
 				frappe.throw(_("A folder cannot have a File URL"))
 			return
+
+		self.enforce_public_file_restrictions()
 
 		# guard against recursion: associate_files() can save another File, re-entering validate
 		if not self.flags.associating_files:
