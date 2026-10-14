@@ -237,7 +237,7 @@ class CloudStorageFile(File):
 		if not surviving:
 			return
 
-		merged_name = (self.doctype, self.name)
+		merged_name = (self.doctype, self.name)  # type: ignore
 		self.name = surviving_name
 		self.file_url = surviving.file_url
 		self.s3_key = surviving.s3_key
