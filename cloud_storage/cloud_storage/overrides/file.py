@@ -70,7 +70,7 @@ class CloudStorageFile(File):
 
 	def validate_file_path(self, path=None):
 		"""
-		HASH: 48366c6ecbad44ed24e6d02bdd8f8f189ce58927
+		HASH: e06abda6b3dfea5027ad6b268a6628cd7e9ba408
 		REPO: https://github.com/frappe/frappe
 		PATH: frappe/core/doctype/file/file.py
 		METHOD: validate_file_path
@@ -78,6 +78,8 @@ class CloudStorageFile(File):
 		if path is None:
 			if self.is_remote_file:
 				return
+			if self.file_url and ".." in self.file_url.split("/"):
+				frappe.throw(_("The File URL you've entered is incorrect"), title=_("Invalid File URL"))
 			path = self.get_full_path()
 		base_path = os.path.realpath(get_files_path(is_private=self.is_private))
 		resolved_path = os.path.realpath(path)
